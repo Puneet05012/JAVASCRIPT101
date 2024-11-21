@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Working with the DOM</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #container {
+      border: 2px solid #333;
+      padding: 20px;
+      margin: 10px 0;
+    }
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <button id="changeContent">Change Content</button>
+  <button id="addElement">Add Element</button>
+  <button id="removeElement">Remove Element</button>
+  <div id="container">
+    <p id="text">This is a paragraph inside a container.</p>
+  </div>
+
+  <script>
+    console.log(" Working with the DOM ");
+
+    const changeContentButton = document.getElementById("changeContent");
+    const addElementButton = document.getElementById("addElement");
+    const removeElementButton = document.getElementById("removeElement");
+    const container = document.getElementById("container");
+    const text = document.getElementById("text");
+
+    function changeContent() {
+      text.textContent = "The content has been updated!";
+      text.classList.add("highlight"); 
+      console.log("Content changed and highlighted.");
+    }
+
+    
+    function addElement() {
+      const newParagraph = document.createElement("p");
+      newParagraph.textContent = "This is a new paragraph added to the container.";
+      container.appendChild(newParagraph); 
+      console.log("New element added.");
+    }
+
+    
+    function removeElement() {
+      if (container.lastChild && container.lastChild !== text) {
+        container.removeChild(container.lastChild); 
+        console.log("Last element removed.");
+      } else {
+        console.log("No element to remove.");
+      }
+    }
+
+    
+    changeContentButton.addEventListener("click", changeContent);
+    addElementButton.addEventListener("click", addElement);
+    removeElementButton.addEventListener("click", removeElement);
+
+    
+    function loopThroughElements() {
+      console.log("\n--- Looping through elements in the container ---");
+      Array.from(container.children).forEach((child, index) => {
+        console.log(`Child ${index + 1}: ${child.textContent}`);
+      });
+    }
+
+    
+    loopThroughElements();
+
+    a
+    container.addEventListener("DOMNodeInserted", loopThroughElements);
+    container.addEventListener("DOMNodeRemoved", loopThroughElements);
+  </script>
+</body>
+</html>
